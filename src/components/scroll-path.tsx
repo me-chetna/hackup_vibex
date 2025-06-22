@@ -18,16 +18,16 @@ export function ScrollPath() {
     return 0;
   });
 
-  const sunY = useTransform(scrollYProgress, [0, 1], ['8.33%', '100%']); // 300/3600
+  const sunY = useTransform(scrollYProgress, [0, 1], ['5.56%', '100%']); // 200/3600
 
-  const pathD = "M 600 300 V 3600";
+  const pathD = "M 800 200 V 3600";
   
   return (
-    <div className="absolute top-0 right-0 w-[700px] h-full pointer-events-none">
+    <div className="absolute top-0 right-0 w-[900px] h-full pointer-events-none">
       <motion.div
         className="absolute"
         style={{
-          left: '600px',
+          left: '800px',
           top: sunY,
           translateX: '-50%',
           translateY: '-50%',
@@ -37,14 +37,14 @@ export function ScrollPath() {
         }}
         transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
       >
-        <div className="w-4 h-4 rounded-full bg-accent" style={{
-            boxShadow: '0 0 25px 10px hsl(var(--accent) / 0.7)',
+        <div className="w-6 h-6 rounded-full bg-accent" style={{
+            boxShadow: '0 0 35px 15px hsl(var(--accent) / 0.7)',
         }}/>
       </motion.div>
       <svg
-        width="700"
+        width="900"
         height="100%"
-        viewBox="0 0 700 3600"
+        viewBox="0 0 900 3600"
         preserveAspectRatio="xMidYMin slice"
         className="opacity-40"
       >
