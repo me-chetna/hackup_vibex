@@ -35,12 +35,6 @@ export function ScrollPath() {
         preserveAspectRatio="xMidYMin slice"
         className="opacity-40"
       >
-        <path
-          d={pathD}
-          fill="none"
-          stroke="hsl(var(--primary))"
-          strokeWidth="2"
-        />
         <motion.path
           ref={pathRef}
           d={pathD}
