@@ -67,11 +67,11 @@ export default function HomePage() {
         <ScrollPath />
       </div>
       <div className="container mx-auto px-4 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-[40%_60%] lg:grid-cols-[50%_50%]">
-            <div className="hidden md:block" />
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_300px]">
             <div>
                  <TeamRequestList initialRequests={mockRequests} />
             </div>
+            <div className="hidden md:block" />
         </div>
       </div>
     </div>

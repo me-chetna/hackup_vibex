@@ -33,14 +33,14 @@ export function ScrollPath() {
     });
   }, [scrollYProgress]);
 
-  const pathD = "M 250 120 C 450 220, 50 450, 250 550 S 450 750, 200 900 S 0 1100, 300 1300 S 500 1500, 250 1700 S -50 1900, 250 2100 S 550 2300, 200 2500 S -50 2700, 300 2900 S 500 3100, 250 3300";
+  const pathD = "M 150 120 C 250 220, 50 450, 150 550 S 250 750, 100 900 S 0 1100, 200 1300 S 300 1500, 150 1700 S 50 1900, 150 2100 S 250 2300, 100 2500 S 50 2700, 200 2900 S 300 3100, 150 3300";
   
   return (
-    <div ref={svgContainerRef} className="absolute top-0 left-0 w-[500px] h-full pointer-events-none">
+    <div ref={svgContainerRef} className="absolute top-0 right-0 w-[300px] h-full pointer-events-none">
        <svg
-        width="500"
+        width="300"
         height="100%"
-        viewBox="0 0 500 3400"
+        viewBox="0 0 300 3400"
         preserveAspectRatio="xMidYMin slice"
         className="opacity-40"
       >
