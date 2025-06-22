@@ -3,6 +3,7 @@
 import { TeamRequestList } from "@/components/team-request-list";
 import type { TeamRequest } from "@/lib/types";
 import { ScrollPath } from "@/components/scroll-path";
+import { motion } from "framer-motion";
 
 // Mock data for team requests
 const mockRequests: TeamRequest[] = [
@@ -69,12 +70,17 @@ export default function HomePage() {
         <ScrollPath />
       </div>
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center pt-16 md:pt-24 mb-16">
+        <motion.div
+          className="text-center pt-16 md:pt-24 mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
             <h1 className="text-6xl md:text-8xl font-bold font-headline text-white tracking-wider uppercase">HackUp</h1>
             <p className="text-xl md:text-2xl text-primary mt-4 font-light tracking-[0.2em] uppercase">
             Let's find your perfect team
             </p>
-        </div>
+        </motion.div>
         <div className="grid grid-cols-1 md:grid-cols-[1fr_300px]">
             <div>
                  <TeamRequestList initialRequests={mockRequests} />

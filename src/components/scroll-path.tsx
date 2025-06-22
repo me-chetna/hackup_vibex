@@ -32,7 +32,7 @@ export function ScrollPath() {
     });
   }, [scrollYProgress]);
 
-  const pathD = "M 150 500 V 3600";
+  const pathD = "M 250 500 V 3600";
   
   return (
     <div className="absolute top-0 right-0 w-[300px] h-full pointer-events-none">
