@@ -21,10 +21,10 @@ export function ScrollPath() {
   // By mapping the scroll progress directly to the `top` CSS property,
   // we ensure the sun's movement is always synchronized with the scrollbar,
   // regardless of the page's actual height.
-  // The path starts at y=500 in a 3600-height viewBox (13.8%).
-  const sunY = useTransform(scrollYProgress, [0, 1], ['13.8%', '100%']);
+  // The path starts at y=800 in a 3600-height viewBox (22.2%).
+  const sunY = useTransform(scrollYProgress, [0, 1], ['22.2%', '100%']);
 
-  const pathD = "M 250 500 V 3600";
+  const pathD = "M 250 800 V 3600";
   
   return (
     <div className="absolute top-0 right-0 w-[300px] h-full pointer-events-none">
