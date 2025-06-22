@@ -18,20 +18,16 @@ export function ScrollPath() {
     return 0;
   });
 
-  // By mapping the scroll progress directly to the `top` CSS property,
-  // we ensure the sun's movement is always synchronized with the scrollbar,
-  // regardless of the page's actual height.
-  // The path starts at y=200 in a 3600-height viewBox.
-  const sunY = useTransform(scrollYProgress, [0, 1], ['5.56%', '100%']);
+  const sunY = useTransform(scrollYProgress, [0, 1], ['8.33%', '100%']); // 300/3600
 
-  const pathD = "M 350 200 V 3600";
+  const pathD = "M 600 300 V 3600";
   
   return (
-    <div className="absolute top-0 right-0 w-[500px] h-full pointer-events-none">
+    <div className="absolute top-0 right-0 w-[700px] h-full pointer-events-none">
       <motion.div
         className="absolute"
         style={{
-          left: '350px',
+          left: '600px',
           top: sunY,
           translateX: '-50%',
           translateY: '-50%',
@@ -41,17 +37,18 @@ export function ScrollPath() {
         }}
         transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
       >
-        <div className="w-8 h-8 rounded-full bg-accent" style={{
-            boxShadow: '0 0 35px 15px hsl(var(--accent) / 0.7)',
+        <div className="w-4 h-4 rounded-full bg-accent" style={{
+            boxShadow: '0 0 25px 10px hsl(var(--accent) / 0.7)',
         }}/>
       </motion.div>
       <svg
-        width="500"
+        width="700"
         height="100%"
-        viewBox="0 0 500 3600"
+        viewBox="0 0 700 3600"
         preserveAspectRatio="xMidYMin slice"
         className="opacity-40"
       >
+        <path d={pathD} fill="none" stroke="hsl(var(--accent))" strokeWidth="2" strokeDasharray="4 8" />
         <motion.path
           ref={pathRef}
           d={pathD}
@@ -59,7 +56,8 @@ export function ScrollPath() {
           stroke="hsl(var(--accent))"
           strokeWidth="2"
           style={{
-            pathLength: pathLength
+            pathLength: pathLength,
+            pathOffset: "0px" // This ensures it starts drawing from the top
           }}
           initial={{ pathLength: 0 }}
         />
