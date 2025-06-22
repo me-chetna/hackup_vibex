@@ -15,6 +15,7 @@ const mockRequests: TeamRequest[] = [
     skills: ["React Native", "Node.js", "Python", "Figma", "Firebase"],
     author: { name: "Alice Johnson", avatarUrl: "https://placehold.co/40x40.png" },
     createdAt: new Date("2023-10-26T10:00:00Z"),
+    hackathonDate: new Date("2023-11-15T09:00:00Z"),
   },
   {
     id: "2",
@@ -24,6 +25,7 @@ const mockRequests: TeamRequest[] = [
     skills: ["React", "TypeScript", "GraphQL", "Prisma", "PostgreSQL"],
     author: { name: "Bob Williams" },
     createdAt: new Date("2023-10-25T14:30:00Z"),
+    hackathonDate: new Date("2023-11-18T09:00:00Z"),
   },
   {
     id: "3",
@@ -33,6 +35,7 @@ const mockRequests: TeamRequest[] = [
     skills: ["Next.js", "Tailwind CSS", "Stripe", "Vercel"],
     author: { name: "Charlie Brown", avatarUrl: "https://placehold.co/40x40.png" },
     createdAt: new Date("2023-10-25T09:00:00Z"),
+    hackathonDate: new Date("2023-11-20T09:00:00Z"),
   },
    {
     id: "4",
@@ -42,6 +45,7 @@ const mockRequests: TeamRequest[] = [
     skills: ["Vue.js", "Django", "Heroku"],
     author: { name: "Diana Prince" },
     createdAt: new Date("2023-10-24T18:00:00Z"),
+    hackathonDate: new Date("2023-11-22T09:00:00Z"),
   },
   {
     id: "5",
@@ -51,6 +55,7 @@ const mockRequests: TeamRequest[] = [
     skills: ["Unity", "C#", "Blender", "Oculus SDK"],
     author: { name: "Eve Adams", avatarUrl: "https://placehold.co/40x40.png" },
     createdAt: new Date("2023-10-24T11:45:00Z"),
+    hackathonDate: new Date("2023-11-25T09:00:00Z"),
   },
   {
     id: "6",
@@ -60,6 +65,7 @@ const mockRequests: TeamRequest[] = [
     skills: ["Python", "TensorFlow", "Flask", "Docker"],
     author: { name: "Frank Miller" },
     createdAt: new Date("2023-10-23T20:15:00Z"),
+    hackathonDate: new Date("2023-11-28T09:00:00Z"),
   },
 ];
 

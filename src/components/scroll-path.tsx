@@ -42,7 +42,6 @@ export function ScrollPath() {
           stroke="hsl(var(--accent))"
           strokeWidth="2"
           style={{
-            strokeDasharray: '10 10',
             pathLength: pathLength
           }}
           initial={{ pathLength: 0 }}
@@ -61,8 +60,8 @@ export function ScrollPath() {
         }}
         transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
       >
-        <div className="w-5 h-5 rounded-full bg-accent" style={{
-            boxShadow: '0 0 20px 8px hsl(var(--accent) / 0.7)',
+        <div className="w-8 h-8 rounded-full bg-accent" style={{
+            boxShadow: '0 0 35px 15px hsl(var(--accent) / 0.7)',
         }}/>
       </motion.div>
     </div>

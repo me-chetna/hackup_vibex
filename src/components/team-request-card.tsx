@@ -3,7 +3,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import type { TeamRequest } from '@/lib/types';
 import { format } from 'date-fns';
-import { Clock } from 'lucide-react';
+import { Calendar } from 'lucide-react';
 
 const getInitials = (name: string) => {
     if (!name) return 'U';
@@ -16,7 +16,7 @@ const getInitials = (name: string) => {
 
 export function TeamRequestCard({ request }: { request: TeamRequest }) {
   return (
-    <Card className="bg-card/60 backdrop-blur-sm border-primary/10 hover:border-primary/40 transition-colors duration-300 rounded-2xl w-full">
+    <Card className="bg-card/60 backdrop-blur-sm border-primary/10 hover:border-primary/40 transition-colors duration-300 rounded-2xl w-full max-w-xl mx-auto">
       <CardHeader>
         <CardTitle className="font-headline text-xl text-primary">{request.projectName}</CardTitle>
         <div className="flex items-center gap-2 text-sm text-muted-foreground pt-2">
@@ -40,8 +40,8 @@ export function TeamRequestCard({ request }: { request: TeamRequest }) {
       </CardContent>
       <CardFooter className="text-xs text-muted-foreground flex justify-end items-center">
          <div className="flex items-center gap-2">
-            <Clock className="h-4 w-4" />
-            <span>Posted on {format(request.createdAt, "PPP")}</span>
+            <Calendar className="h-4 w-4" />
+            <span>Hackathon on {format(request.hackathonDate, "PPP")}</span>
          </div>
       </CardFooter>
     </Card>

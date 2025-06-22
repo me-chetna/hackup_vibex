@@ -9,4 +9,5 @@ export interface TeamRequest {
     avatarUrl?: string;
   };
   createdAt: Date;
+  hackathonDate: Date;
 }
