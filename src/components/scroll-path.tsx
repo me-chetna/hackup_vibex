@@ -9,6 +9,7 @@ export function ScrollPath() {
   });
 
   const pathRef = useRef<SVGPathElement>(null);
+  
   const pathLength = useTransform(scrollYProgress, (value) => {
     if (pathRef.current) {
         const totalLength = pathRef.current.getTotalLength();
@@ -20,17 +21,17 @@ export function ScrollPath() {
   // By mapping the scroll progress directly to the `top` CSS property,
   // we ensure the sun's movement is always synchronized with the scrollbar,
   // regardless of the page's actual height.
-  // The path starts at y=100 in a 3600-height viewBox.
-  const sunY = useTransform(scrollYProgress, [0, 1], ['2.78%', '100%']);
+  // The path starts at y=200 in a 3600-height viewBox.
+  const sunY = useTransform(scrollYProgress, [0, 1], ['5.56%', '100%']);
 
-  const pathD = "M 250 100 V 3600";
+  const pathD = "M 350 200 V 3600";
   
   return (
     <div className="absolute top-0 right-0 w-[500px] h-full pointer-events-none">
       <motion.div
         className="absolute"
         style={{
-          left: '250px',
+          left: '350px',
           top: sunY,
           translateX: '-50%',
           translateY: '-50%',
