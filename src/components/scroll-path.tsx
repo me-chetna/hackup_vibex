@@ -1,11 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
 export function ScrollPath() {
   const pathRef = useRef<SVGPathElement>(null);
-  const [sunPosition, setSunPosition] = useState({ x: 0, y: 0 });
 
   const { scrollYProgress } = useScroll({
     offset: ["start start", "end end"]
@@ -19,18 +18,11 @@ export function ScrollPath() {
     return 0;
   });
 
-  useEffect(() => {
-    return scrollYProgress.on("change", (latest) => {
-      if (pathRef.current) {
-        const path = pathRef.current;
-        const length = path.getTotalLength();
-        if (length > 0) {
-            const point = path.getPointAtLength(latest * length);
-            setSunPosition({ x: point.x, y: point.y });
-        }
-      }
-    });
-  }, [scrollYProgress]);
+  // By mapping the scroll progress directly to the `top` CSS property,
+  // we ensure the sun's movement is always synchronized with the scrollbar,
+  // regardless of the page's actual height.
+  // The path starts at y=500 in a 3600-height viewBox (13.8%).
+  const sunY = useTransform(scrollYProgress, [0, 1], ['13.8%', '100%']);
 
   const pathD = "M 250 500 V 3600";
   
@@ -65,8 +57,8 @@ export function ScrollPath() {
       <motion.div
         className="absolute"
         style={{
-          left: sunPosition.x,
-          top: sunPosition.y,
+          left: '250px',
+          top: sunY,
           translateX: '-50%',
           translateY: '-50%',
         }}
