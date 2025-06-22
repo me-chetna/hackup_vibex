@@ -76,8 +76,8 @@ export default function HomePage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-            <h1 className="text-6xl md:text-8xl font-display text-white tracking-wider uppercase">HackUp</h1>
-            <p className="text-xl md:text-2xl text-primary mt-4 font-display tracking-[0.2em] uppercase">
+            <h1 className="text-6xl md:text-8xl font-headline text-white tracking-wider uppercase drop-shadow-[0_0_8px_hsl(var(--primary))]">HackUp</h1>
+            <p className="text-xl md:text-2xl text-accent mt-4 font-headline tracking-[0.2em] uppercase">
             Let's find your perfect team
             </p>
         </motion.div>
