@@ -37,8 +37,8 @@ export function ScrollPath() {
         }}
         transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
       >
-        <div className="w-6 h-6 rounded-full bg-accent" style={{
-            boxShadow: '0 0 35px 15px hsl(var(--accent) / 0.7)',
+        <div className="w-12 h-12 rounded-full bg-accent" style={{
+            boxShadow: '0 0 60px 30px hsl(var(--accent) / 0.7)',
         }}/>
       </motion.div>
       <svg
