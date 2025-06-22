@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import type { TeamRequest } from '@/lib/types';
 import { format, formatDistanceToNow } from 'date-fns';
 import { Calendar, Clock } from 'lucide-react';
+import { Button } from "@/components/ui/button";
 
 const getInitials = (name: string) => {
     if (!name) return 'U';
@@ -38,15 +39,18 @@ export function TeamRequestCard({ request }: { request: TeamRequest }) {
             </div>
         </div>
       </CardContent>
-      <CardFooter className="text-xs text-muted-foreground flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 pt-4">
-         <div className="flex items-center gap-2">
-            <Clock className="h-4 w-4" />
-            <span>Posted {formatDistanceToNow(request.createdAt, { addSuffix: true })}</span>
-         </div>
-         <div className="flex items-center gap-2">
-            <Calendar className="h-4 w-4" />
-            <span>Hackathon on {format(request.hackathonDate, "PPP")}</span>
-         </div>
+      <CardFooter className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4">
+        <div className="w-full sm:w-auto flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-xs text-muted-foreground">
+            <div className="flex items-center gap-2">
+                <Clock className="h-4 w-4" />
+                <span>Posted {formatDistanceToNow(request.createdAt, { addSuffix: true })}</span>
+            </div>
+            <div className="flex items-center gap-2">
+                <Calendar className="h-4 w-4" />
+                <span>Hackathon on {format(request.hackathonDate, "PPP")}</span>
+            </div>
+        </div>
+        <Button size="sm" variant="outline-primary" className="w-full sm:w-auto">Join Team</Button>
       </CardFooter>
     </Card>
   );
