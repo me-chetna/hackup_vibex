@@ -20,14 +20,14 @@ export function ScrollPath() {
 
   const sunY = useTransform(scrollYProgress, [0, 1], ['5.56%', '100%']); // 200/3600
 
-  const pathD = "M 800 200 V 3600";
+  const pathD = "M 820 200 V 3600";
   
   return (
     <div className="absolute top-0 right-0 w-[900px] h-full pointer-events-none">
       <motion.div
         className="absolute"
         style={{
-          left: '800px',
+          left: '820px',
           top: sunY,
           translateX: '-50%',
           translateY: '-50%',
