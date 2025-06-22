@@ -82,7 +82,7 @@ export default function HomePage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-            <h1 className="text-6xl md:text-8xl font-headline font-bold tracking-tighter uppercase bg-clip-text text-transparent bg-gradient-to-b from-accent to-primary py-2">HackUp</h1>
+            <h1 className="text-6xl md:text-8xl font-headline font-bold tracking-tighter uppercase bg-clip-text text-transparent bg-gradient-to-b from-[#FFB941] to-[#FF3800] py-2">HackUp</h1>
             <p className="text-lg md:text-xl text-primary/80 mt-2 font-headline tracking-widest uppercase">
             Let's find your perfect team
             </p>
