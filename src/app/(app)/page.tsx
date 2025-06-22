@@ -1,5 +1,6 @@
 import { TeamRequestList } from "@/components/team-request-list";
 import type { TeamRequest } from "@/lib/types";
+import { ScrollPath } from "@/components/scroll-path";
 
 // Mock data for team requests
 const mockRequests: TeamRequest[] = [
@@ -61,8 +62,18 @@ const mockRequests: TeamRequest[] = [
 
 export default function HomePage() {
   return (
-    <div className="container mx-auto py-12 px-4">
-      <TeamRequestList initialRequests={mockRequests} />
+    <div className="relative w-full">
+      <div className="hidden md:block">
+        <ScrollPath />
+      </div>
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-[40%_60%] lg:grid-cols-[50%_50%]">
+            <div className="hidden md:block" />
+            <div>
+                 <TeamRequestList initialRequests={mockRequests} />
+            </div>
+        </div>
+      </div>
     </div>
   );
 }

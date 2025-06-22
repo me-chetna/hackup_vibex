@@ -1,11 +1,11 @@
 "use client";
 import React, { useState, useMemo, useEffect } from 'react';
 import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
 import { Search, Frown } from 'lucide-react';
 import { TeamRequestCard } from '@/components/team-request-card';
 import type { TeamRequest } from '@/lib/types';
 import { AnimatePresence, motion } from 'framer-motion';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 interface TeamRequestListProps {
   initialRequests: TeamRequest[];
@@ -32,34 +32,67 @@ export function TeamRequestList({ initialRequests }: TeamRequestListProps) {
   }, [searchQuery, requests]);
 
   return (
-    <div>
-      <div className="mb-8 text-center max-w-3xl mx-auto">
-        <h1 className="text-4xl md:text-5xl font-extrabold font-headline text-primary mb-3">Find Your Dream Team</h1>
-        <p className="text-lg text-muted-foreground">
-          Browse requests or post your own to build the perfect hackathon squad.
+    <div className="py-16 md:py-24">
+      <div className="text-center max-w-3xl mx-auto mb-16">
+        <h1 className="text-6xl md:text-8xl font-bold font-headline text-white tracking-wider uppercase">HackUp</h1>
+        <p className="text-xl md:text-2xl text-primary mt-4 font-light tracking-[0.2em] uppercase">
+          Let's find your perfect team
         </p>
       </div>
-      <div className="flex w-full max-w-2xl mx-auto items-center space-x-2 mb-12">
-        <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+      <div className="flex flex-col md:flex-row w-full max-w-3xl mx-auto items-center space-y-4 md:space-y-0 md:space-x-4 mb-12">
+        <div className="relative flex-1 w-full">
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
           <Input 
             type="search"
-            placeholder="Search by keyword, skill, or role... (e.g. 'React', 'Designer')"
-            className="pl-10 h-12 text-base"
+            placeholder="Search for name of the team..."
+            className="pl-12 h-14 text-base bg-card border-0 rounded-full"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
+        </div>
+        <div className="grid grid-cols-3 gap-2 w-full md:w-auto">
+            <Select>
+                <SelectTrigger className="w-full h-14 bg-card border-0 rounded-full">
+                    <SelectValue placeholder="Year" />
+                </SelectTrigger>
+                <SelectContent>
+                    <SelectItem value="2024">2024</SelectItem>
+                    <SelectItem value="2023">2023</SelectItem>
+                    <SelectItem value="2022">2022</SelectItem>
+                </SelectContent>
+            </Select>
+            <Select>
+                <SelectTrigger className="w-full h-14 bg-card border-0 rounded-full">
+                    <SelectValue placeholder="College" />
+                </SelectTrigger>
+                <SelectContent>
+                    <SelectItem value="mit">MIT</SelectItem>
+                    <SelectItem value="stanford">Stanford</SelectItem>
+                    <SelectItem value="harvard">Harvard</SelectItem>
+                </SelectContent>
+            </Select>
+            <Select>
+                <SelectTrigger className="w-full h-14 bg-card border-0 rounded-full">
+                    <SelectValue placeholder="Time" />
+                </SelectTrigger>
+                <SelectContent>
+                    <SelectItem value="weekend">This Weekend</SelectItem>
+                    <SelectItem value="month">This Month</SelectItem>
+                    <SelectItem value="anytime">Anytime</SelectItem>
+                </SelectContent>
+            </Select>
         </div>
       </div>
       
       {isMounted && (
         <AnimatePresence>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="flex flex-col items-center space-y-6">
             {filteredRequests.length > 0 ? (
               filteredRequests.map((request, i) => (
                 <motion.div
                   key={request.id}
                   layout
+                  className="w-full max-w-3xl"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95 }}
