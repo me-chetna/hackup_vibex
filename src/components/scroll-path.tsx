@@ -4,12 +4,10 @@ import { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
 export function ScrollPath() {
-  const svgContainerRef = useRef<HTMLDivElement>(null);
   const pathRef = useRef<SVGPathElement>(null);
   const [sunPosition, setSunPosition] = useState({ x: 0, y: 0 });
 
   const { scrollYProgress } = useScroll({
-    target: svgContainerRef,
     offset: ["start start", "end end"]
   });
   
@@ -36,7 +34,7 @@ export function ScrollPath() {
   const pathD = "M 150 400 C 250 500, 50 730, 150 830 S 250 1030, 100 1180 S 0 1380, 200 1580 S 300 1780, 150 1980 S 50 2180, 150 2380 S 250 2580, 100 2780 S 50 2980, 200 3180 S 300 3380, 150 3580";
   
   return (
-    <div ref={svgContainerRef} className="absolute top-0 right-0 w-[300px] h-full pointer-events-none">
+    <div className="absolute top-0 right-0 w-[300px] h-full pointer-events-none">
        <svg
         width="300"
         height="100%"

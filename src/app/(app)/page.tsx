@@ -67,6 +67,12 @@ export default function HomePage() {
         <ScrollPath />
       </div>
       <div className="container mx-auto px-4 relative z-10">
+        <div className="text-center pt-16 md:pt-24 mb-16">
+            <h1 className="text-6xl md:text-8xl font-bold font-headline text-white tracking-wider uppercase">HackUp</h1>
+            <p className="text-xl md:text-2xl text-primary mt-4 font-light tracking-[0.2em] uppercase">
+            Let's find your perfect team
+            </p>
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-[1fr_300px]">
             <div>
                  <TeamRequestList initialRequests={mockRequests} />

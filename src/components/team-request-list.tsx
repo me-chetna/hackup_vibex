@@ -32,13 +32,7 @@ export function TeamRequestList({ initialRequests }: TeamRequestListProps) {
   }, [searchQuery, requests]);
 
   return (
-    <div className="py-16 md:py-24">
-      <div className="text-center mb-16">
-        <h1 className="text-6xl md:text-8xl font-bold font-headline text-white tracking-wider uppercase">HackUp</h1>
-        <p className="text-xl md:text-2xl text-primary mt-4 font-light tracking-[0.2em] uppercase">
-          Let's find your perfect team
-        </p>
-      </div>
+    <div className="pb-16 md:pb-24">
       <div className="flex flex-col md:flex-row w-full items-center space-y-4 md:space-y-0 md:space-x-4 mb-12">
         <div className="relative flex-1 w-full">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
