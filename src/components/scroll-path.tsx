@@ -3,11 +3,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
-export function ScrollPath() {
+export function ScrollPath({ target }: { target: React.RefObject<HTMLDivElement> }) {
   const pathRef = useRef<SVGPathElement>(null);
   const [sunPosition, setSunPosition] = useState({ x: 0, y: 0 });
 
   const { scrollYProgress } = useScroll({
+    target,
     offset: ["start start", "end end"]
   });
   

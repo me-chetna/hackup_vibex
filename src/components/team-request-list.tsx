@@ -33,49 +33,47 @@ export function TeamRequestList({ initialRequests }: TeamRequestListProps) {
 
   return (
     <div className="pb-16 md:pb-24">
-      <div className="flex flex-col md:flex-row w-full items-center space-y-4 md:space-y-0 md:space-x-4 mb-12">
-        <div className="relative flex-1 w-full">
+      <div className="flex flex-col md:flex-row w-full items-center gap-4 mb-12">
+        <div className="relative flex-grow w-full">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
           <Input 
             type="search"
-            placeholder="Search for name of the team..."
+            placeholder="Search for projects, roles, or skills..."
             className="pl-12 h-14 text-base bg-card border-0 rounded-full"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
-        <div className="grid grid-cols-3 gap-2 w-full md:w-auto">
-            <Select>
-                <SelectTrigger className="w-full h-14 bg-card border-0 rounded-full">
-                    <SelectValue placeholder="Year" />
-                </SelectTrigger>
-                <SelectContent>
-                    <SelectItem value="2024">2024</SelectItem>
-                    <SelectItem value="2023">2023</SelectItem>
-                    <SelectItem value="2022">2022</SelectItem>
-                </SelectContent>
-            </Select>
-            <Select>
-                <SelectTrigger className="w-full h-14 bg-card border-0 rounded-full">
-                    <SelectValue placeholder="College" />
-                </SelectTrigger>
-                <SelectContent>
-                    <SelectItem value="mit">MIT</SelectItem>
-                    <SelectItem value="stanford">Stanford</SelectItem>
-                    <SelectItem value="harvard">Harvard</SelectItem>
-                </SelectContent>
-            </Select>
-            <Select>
-                <SelectTrigger className="w-full h-14 bg-card border-0 rounded-full">
-                    <SelectValue placeholder="Time" />
-                </SelectTrigger>
-                <SelectContent>
-                    <SelectItem value="weekend">This Weekend</SelectItem>
-                    <SelectItem value="month">This Month</SelectItem>
-                    <SelectItem value="anytime">Anytime</SelectItem>
-                </SelectContent>
-            </Select>
-        </div>
+        <Select>
+            <SelectTrigger className="w-full md:w-[180px] h-14 bg-card border-0 rounded-full">
+                <SelectValue placeholder="Year" />
+            </SelectTrigger>
+            <SelectContent>
+                <SelectItem value="2024">2024</SelectItem>
+                <SelectItem value="2023">2023</SelectItem>
+                <SelectItem value="2022">2022</SelectItem>
+            </SelectContent>
+        </Select>
+        <Select>
+            <SelectTrigger className="w-full md:w-[180px] h-14 bg-card border-0 rounded-full">
+                <SelectValue placeholder="College" />
+            </SelectTrigger>
+            <SelectContent>
+                <SelectItem value="mit">MIT</SelectItem>
+                <SelectItem value="stanford">Stanford</SelectItem>
+                <SelectItem value="harvard">Harvard</SelectItem>
+            </SelectContent>
+        </Select>
+        <Select>
+            <SelectTrigger className="w-full md:w-[180px] h-14 bg-card border-0 rounded-full">
+                <SelectValue placeholder="Time" />
+            </SelectTrigger>
+            <SelectContent>
+                <SelectItem value="weekend">This Weekend</SelectItem>
+                <SelectItem value="month">This Month</SelectItem>
+                <SelectItem value="anytime">Anytime</SelectItem>
+            </SelectContent>
+        </Select>
       </div>
       
       {isMounted && (
