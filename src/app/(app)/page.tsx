@@ -3,7 +3,6 @@
 import { TeamRequestList } from "@/components/team-request-list";
 import type { TeamRequest } from "@/lib/types";
 import { ScrollPath } from "@/components/scroll-path";
-import { useRef } from "react";
 
 // Mock data for team requests
 const mockRequests: TeamRequest[] = [
@@ -64,12 +63,10 @@ const mockRequests: TeamRequest[] = [
 ];
 
 export default function HomePage() {
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-
   return (
-    <div ref={scrollContainerRef} className="relative w-full">
+    <div className="relative w-full">
       <div className="hidden md:block">
-        <ScrollPath target={scrollContainerRef} />
+        <ScrollPath />
       </div>
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center pt-16 md:pt-24 mb-16">

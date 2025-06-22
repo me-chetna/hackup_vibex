@@ -78,7 +78,7 @@ export function TeamRequestList({ initialRequests }: TeamRequestListProps) {
       
       {isMounted && (
         <AnimatePresence>
-          <div className="flex flex-col space-y-6 max-w-4xl mx-auto w-full">
+          <div className="flex flex-col space-y-6 max-w-2xl mx-auto w-full">
             {filteredRequests.length > 0 ? (
               filteredRequests.map((request, i) => (
                 <motion.div

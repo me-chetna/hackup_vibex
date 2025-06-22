@@ -3,18 +3,18 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
-export function ScrollPath({ target }: { target: React.RefObject<HTMLDivElement> }) {
+export function ScrollPath() {
   const pathRef = useRef<SVGPathElement>(null);
   const [sunPosition, setSunPosition] = useState({ x: 0, y: 0 });
 
   const { scrollYProgress } = useScroll({
-    target,
     offset: ["start start", "end end"]
   });
   
   const pathLength = useTransform(scrollYProgress, (value) => {
     if (pathRef.current) {
-        return pathRef.current.getTotalLength() * value;
+        const totalLength = pathRef.current.getTotalLength();
+        return totalLength * value;
     }
     return 0;
   });
@@ -32,7 +32,7 @@ export function ScrollPath({ target }: { target: React.RefObject<HTMLDivElement>
     });
   }, [scrollYProgress]);
 
-  const pathD = "M 150 400 C 250 500, 50 730, 150 830 S 250 1030, 100 1180 S 0 1380, 200 1580 S 300 1780, 150 1980 S 50 2180, 150 2380 S 250 2580, 100 2780 S 50 2980, 200 3180 S 300 3380, 150 3580";
+  const pathD = "M 150 500 S 250 600, 150 700 S 50 800, 150 900 S 250 1000, 150 1100 S 50 1200, 150 1300 S 250 1400, 150 1500 S 50 1600, 150 1700 S 250 1800, 150 1900 S 50 2000, 150 2100 S 250 2200, 150 2300 S 50 2400, 150 2500 S 250 2600, 150 2700 S 50 2800, 150 2900 S 250 3000, 150 3100 S 50 3200, 150 3300 S 250 3400, 150 3500";
   
   return (
     <div className="absolute top-0 right-0 w-[300px] h-full pointer-events-none">
