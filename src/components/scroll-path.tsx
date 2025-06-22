@@ -32,7 +32,7 @@ export function ScrollPath() {
     });
   }, [scrollYProgress]);
 
-  const pathD = "M 150 500 S 250 600, 150 700 S 50 800, 150 900 S 250 1000, 150 1100 S 50 1200, 150 1300 S 250 1400, 150 1500 S 50 1600, 150 1700 S 250 1800, 150 1900 S 50 2000, 150 2100 S 250 2200, 150 2300 S 50 2400, 150 2500 S 250 2600, 150 2700 S 50 2800, 150 2900 S 250 3000, 150 3100 S 50 3200, 150 3300 S 250 3400, 150 3500";
+  const pathD = "M 150 500 V 3600";
   
   return (
     <div className="absolute top-0 right-0 w-[300px] h-full pointer-events-none">
