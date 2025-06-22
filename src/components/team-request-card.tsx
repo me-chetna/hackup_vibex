@@ -2,8 +2,8 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import type { TeamRequest } from '@/lib/types';
-import { format } from 'date-fns';
-import { Calendar } from 'lucide-react';
+import { format, formatDistanceToNow } from 'date-fns';
+import { Calendar, Clock } from 'lucide-react';
 
 const getInitials = (name: string) => {
     if (!name) return 'U';
@@ -38,7 +38,11 @@ export function TeamRequestCard({ request }: { request: TeamRequest }) {
             </div>
         </div>
       </CardContent>
-      <CardFooter className="text-xs text-muted-foreground flex justify-end items-center">
+      <CardFooter className="text-xs text-muted-foreground flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 pt-4">
+         <div className="flex items-center gap-2">
+            <Clock className="h-4 w-4" />
+            <span>Posted {formatDistanceToNow(request.createdAt, { addSuffix: true })}</span>
+         </div>
          <div className="flex items-center gap-2">
             <Calendar className="h-4 w-4" />
             <span>Hackathon on {format(request.hackathonDate, "PPP")}</span>
