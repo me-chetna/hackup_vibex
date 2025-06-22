@@ -37,8 +37,8 @@ export function ScrollPath() {
         }}
         transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
       >
-        <div className="w-12 h-12 rounded-full bg-accent" style={{
-            boxShadow: '0 0 60px 30px hsl(var(--accent) / 0.7)',
+        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-yellow-400 via-orange-500 to-red-600" style={{
+            boxShadow: '0 0 60px 30px hsl(var(--primary) / 0.7)',
         }}/>
       </motion.div>
       <svg
@@ -48,12 +48,12 @@ export function ScrollPath() {
         preserveAspectRatio="xMidYMin slice"
         className="opacity-40"
       >
-        <path d={pathD} fill="none" stroke="hsl(var(--accent))" strokeWidth="2" strokeDasharray="4 8" />
+        <path d={pathD} fill="none" stroke="hsl(var(--primary))" strokeWidth="2" strokeDasharray="4 8" />
         <motion.path
           ref={pathRef}
           d={pathD}
           fill="none"
-          stroke="hsl(var(--accent))"
+          stroke="hsl(var(--primary))"
           strokeWidth="2"
           style={{
             pathLength: pathLength,
