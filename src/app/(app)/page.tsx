@@ -4,6 +4,10 @@ import { TeamRequestList } from "@/components/team-request-list";
 import type { TeamRequest } from "@/lib/types";
 import { ScrollPath } from "@/components/scroll-path";
 import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import Link from "next/link";
+import { PlusCircle } from "lucide-react";
 
 // Mock data for team requests
 const mockRequests: TeamRequest[] = [
@@ -77,7 +81,7 @@ export default function HomePage() {
       </div>
       <div className="w-full lg:w-5/6 px-4 sm:px-8 md:pl-16 relative z-10">
         <motion.div
-          className="text-center pt-16 md:pt-24 mb-16"
+          className="text-center pt-16 md:pt-24"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -87,6 +91,22 @@ export default function HomePage() {
             Let's find your perfect team
             </p>
         </motion.div>
+
+        <div className="sticky top-[90px] z-20 py-4 bg-background/80 backdrop-blur-sm -mx-4 sm:-mx-8 md:-ml-16 px-4 sm:px-8 md:pl-16 my-8">
+          <Card className="p-4 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-lg border-primary/20">
+              <div className="text-center sm:text-left">
+                <h3 className="font-semibold text-lg text-primary">Have a project idea?</h3>
+                <p className="text-sm text-muted-foreground">Post a request and build your dream team.</p>
+              </div>
+              <Button asChild className="w-full sm:w-auto flex-shrink-0">
+                  <Link href="/create-request">
+                      <PlusCircle className="mr-2 h-4 w-4" />
+                      Create a Team
+                  </Link>
+              </Button>
+          </Card>
+        </div>
+        
         <div className="grid grid-cols-1">
             <div>
                  <TeamRequestList initialRequests={mockRequests} />
