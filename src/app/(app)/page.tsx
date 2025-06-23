@@ -75,7 +75,7 @@ export default function HomePage() {
       <div className="hidden md:block">
         <ScrollPath />
       </div>
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="w-full lg:w-5/6 px-4 sm:px-8 md:pl-16 relative z-10">
         <motion.div
           className="text-center pt-16 md:pt-24 mb-16"
           initial={{ opacity: 0, y: 20 }}
@@ -87,11 +87,10 @@ export default function HomePage() {
             Let's find your perfect team
             </p>
         </motion.div>
-        <div className="grid grid-cols-1 md:grid-cols-[1fr_300px]">
+        <div className="grid grid-cols-1">
             <div>
                  <TeamRequestList initialRequests={mockRequests} />
             </div>
-            <div className="hidden md:block" />
         </div>
       </div>
     </div>
