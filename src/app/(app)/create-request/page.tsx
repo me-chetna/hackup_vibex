@@ -5,6 +5,8 @@ import * as z from "zod";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/components/providers/auth-provider";
 import { useEffect } from "react";
+import { format } from "date-fns";
+import { Calendar as CalendarIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -21,15 +23,21 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Calendar } from "@/components/ui/calendar";
+import { cn } from "@/lib/utils";
+
 
 const formSchema = z.object({
   projectName: z.string().min(3, {
-    message: "Project name must be at least 3 characters.",
+    message: "Hackathon name must be at least 3 characters.",
   }),
   projectDescription: z.string().min(20, {
     message: "Description must be at least 20 characters.",
   }),
-  roles: z.string().min(1, { message: "Please specify at least one role." }),
+  hackathonDate: z.date({
+    required_error: "A date for the hackathon is required.",
+  }),
   skills: z.string().min(1, { message: "Please specify at least one skill." }),
 });
 
@@ -49,7 +57,6 @@ export default function CreateRequestPage() {
     defaultValues: {
       projectName: "",
       projectDescription: "",
-      roles: "",
       skills: "",
     },
   });
@@ -57,8 +64,8 @@ export default function CreateRequestPage() {
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log({
         ...values,
-        roles: values.roles.split(',').map(s => s.trim()),
         skills: values.skills.split(',').map(s => s.trim()),
+        author: user?.name,
     });
     toast({
       title: "Request Submitted!",
@@ -88,6 +95,10 @@ export default function CreateRequestPage() {
                         <Skeleton className="h-4 w-24" />
                         <Skeleton className="h-10 w-full" />
                     </div>
+                     <div className="space-y-2">
+                        <Skeleton className="h-4 w-24" />
+                        <Skeleton className="h-10 w-full" />
+                    </div>
                     <Skeleton className="h-10 w-full" />
                 </CardContent>
             </Card>
@@ -112,23 +123,73 @@ export default function CreateRequestPage() {
                   name="projectName"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Project Name</FormLabel>
+                      <FormLabel>Name of the Hackathon</FormLabel>
                       <FormControl>
-                        <Input placeholder="e.g., Eco-Friendly Delivery App" {...field} />
+                        <Input placeholder="e.g., The Ultimate AI Hackathon" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
+
+                <FormItem>
+                    <FormLabel>Leader Name</FormLabel>
+                    <FormControl>
+                        <Input value={user.name} disabled />
+                    </FormControl>
+                </FormItem>
+                
+                <FormField
+                  control={form.control}
+                  name="hackathonDate"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-col">
+                      <FormLabel>Date of Hackathon</FormLabel>
+                      <Popover>
+                        <PopoverTrigger asChild>
+                          <FormControl>
+                            <Button
+                              variant={"outline"}
+                              className={cn(
+                                "w-full pl-3 text-left font-normal",
+                                !field.value && "text-muted-foreground"
+                              )}
+                            >
+                              {field.value ? (
+                                format(field.value, "PPP")
+                              ) : (
+                                <span>Pick a date</span>
+                              )}
+                              <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                            </Button>
+                          </FormControl>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-auto p-0" align="start">
+                          <Calendar
+                            mode="single"
+                            selected={field.value}
+                            onSelect={field.onChange}
+                            disabled={(date) =>
+                              date < new Date(new Date().setHours(0,0,0,0))
+                            }
+                            initialFocus
+                          />
+                        </PopoverContent>
+                      </Popover>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
                 <FormField
                   control={form.control}
                   name="projectDescription"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Project Description</FormLabel>
+                      <FormLabel>Description of Hackathon</FormLabel>
                       <FormControl>
                         <Textarea
-                          placeholder="Describe your project idea, goals, and what you want to build."
+                          placeholder="Describe the hackathon's theme, goals, and any specific challenges."
                           className="resize-none"
                           rows={4}
                           {...field}
@@ -138,30 +199,15 @@ export default function CreateRequestPage() {
                     </FormItem>
                   )}
                 />
-                <FormField
-                  control={form.control}
-                  name="roles"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Needed Roles</FormLabel>
-                      <FormControl>
-                        <Input placeholder="e.g., Frontend Developer, UI/UX Designer" {...field} />
-                      </FormControl>
-                      <FormDescription>
-                        Enter roles separated by commas.
-                      </FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+
                 <FormField
                   control={form.control}
                   name="skills"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Required Skills</FormLabel>
+                      <FormLabel>Skills Required</FormLabel>
                       <FormControl>
-                        <Input placeholder="e.g., React, Node.js, Figma" {...field} />
+                        <Input placeholder="e.g., React, Node.js, Python, Figma" {...field} />
                       </FormControl>
                       <FormDescription>
                         Enter skills separated by commas.
@@ -170,6 +216,7 @@ export default function CreateRequestPage() {
                     </FormItem>
                   )}
                 />
+
                 <Button type="submit" className="w-full !mt-10" size="lg">Post Request</Button>
               </form>
             </Form>
