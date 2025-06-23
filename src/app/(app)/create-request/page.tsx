@@ -1,3 +1,4 @@
+
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -47,10 +48,25 @@ export default function CreateRequestPage() {
   const { toast } = useToast();
 
   useEffect(() => {
-    if (!loading && !user) {
-      router.push('/login');
+    if (loading) {
+      return;
     }
-  }, [user, loading, router]);
+    if (!user) {
+      // User is not logged in, redirect to home page so they can see the login pop-up.
+      router.push('/');
+      return;
+    }
+    // TODO: Replace 'acme.com' with your company's email domain
+    const ALLOWED_DOMAIN = 'acme.com';
+    if (!user.email.endsWith(`@${ALLOWED_DOMAIN}`)) {
+      toast({
+        variant: 'destructive',
+        title: 'Permission Denied',
+        description: 'You do not have permission to create a team request.',
+      });
+      router.push('/');
+    }
+  }, [user, loading, router, toast]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

@@ -1,3 +1,4 @@
+
 "use client";
 
 import { TeamRequestList } from "@/components/team-request-list";
@@ -6,8 +7,19 @@ import { ScrollPath } from "@/components/scroll-path";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import Link from "next/link";
 import { PlusCircle } from "lucide-react";
+import { useState } from "react";
+import { useAuth } from "@/components/providers/auth-provider";
+import { useRouter } from "next/navigation";
+import { useToast } from "@/hooks/use-toast";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
+import { LoginForm } from "@/components/login-form";
 
 // Mock data for team requests
 const mockRequests: TeamRequest[] = [
@@ -74,45 +86,89 @@ const mockRequests: TeamRequest[] = [
 ];
 
 export default function HomePage() {
-  return (
-    <div className="relative w-full">
-      <div className="hidden md:block">
-        <ScrollPath />
-      </div>
-      <div className="w-full lg:w-5/6 px-4 sm:px-8 md:pl-16 relative z-10">
-        <motion.div
-          className="text-center pt-16 md:pt-24"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-            <h1 className="text-6xl md:text-8xl font-headline font-bold tracking-tighter uppercase bg-clip-text text-transparent bg-gradient-to-b from-[#FFB941] to-[#FF3800] py-2">HackUp</h1>
-            <p className="text-lg md:text-xl text-primary/80 mt-2 font-headline tracking-widest uppercase">
-            Let's find your perfect team
-            </p>
-        </motion.div>
+  const router = useRouter();
+  const { user } = useAuth();
+  const { toast } = useToast();
+  const [showLoginDialog, setShowLoginDialog] = useState(false);
 
-        <div className="sticky top-[90px] z-20 py-4 bg-background/80 backdrop-blur-sm -mx-4 sm:-mx-8 md:-ml-16 px-4 sm:px-8 md:pl-16 my-8">
-          <Card className="p-4 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-lg border-primary/20">
-              <div className="text-center sm:text-left">
-                <h3 className="font-semibold text-lg text-primary">Have a project idea?</h3>
-                <p className="text-sm text-muted-foreground">Post a request and build your dream team.</p>
-              </div>
-              <Button asChild className="w-full sm:w-auto flex-shrink-0">
-                  <Link href="/create-request">
-                      <PlusCircle className="mr-2 h-4 w-4" />
-                      Create a Team
-                  </Link>
-              </Button>
-          </Card>
+  const handleCreateRequestClick = () => {
+    if (!user) {
+      setShowLoginDialog(true);
+      return;
+    }
+
+    // TODO: Replace 'acme.com' with your company's email domain
+    const ALLOWED_DOMAIN = 'acme.com';
+    if (user.email.endsWith(`@${ALLOWED_DOMAIN}`)) {
+      router.push('/create-request');
+    } else {
+      toast({
+        variant: 'destructive',
+        title: 'Permission Denied',
+        description: `Only users with an @${ALLOWED_DOMAIN} email can create team requests.`,
+      });
+    }
+  };
+
+  return (
+    <>
+      <div className="relative w-full">
+        <div className="hidden md:block">
+          <ScrollPath />
         </div>
-        
-        <div className="grid grid-cols-1">
-            <div>
-                 <TeamRequestList initialRequests={mockRequests} />
-            </div>
+        <div className="w-full lg:w-5/6 px-4 sm:px-8 md:pl-16 relative z-10">
+          <motion.div
+            className="text-center pt-16 md:pt-24"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+              <h1 className="text-6xl md:text-8xl font-headline font-bold tracking-tighter uppercase bg-clip-text text-transparent bg-gradient-to-b from-[#FFB941] to-[#FF3800] py-2">HackUp</h1>
+              <p className="text-lg md:text-xl text-primary/80 mt-2 font-headline tracking-widest uppercase">
+              Let's find your perfect team
+              </p>
+          </motion.div>
+
+          <div className="sticky top-[90px] z-20 py-4 bg-background/80 backdrop-blur-sm -mx-4 sm:-mx-8 md:-ml-16 px-4 sm:px-8 md:pl-16 my-8">
+            <Card className="p-4 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-lg border-primary/20">
+                <div className="text-center sm:text-left">
+                  <h3 className="font-semibold text-lg text-primary">Have a project idea?</h3>
+                  <p className="text-sm text-muted-foreground">Post a request and build your dream team.</p>
+                </div>
+                <Button onClick={handleCreateRequestClick} className="w-full sm:w-auto flex-shrink-0">
+                    <PlusCircle className="mr-2 h-4 w-4" />
+                    Create a Team
+                </Button>
+            </Card>
+          </div>
+          
+          <div className="grid grid-cols-1">
+              <div>
+                   <TeamRequestList initialRequests={mockRequests} />
+              </div>
+          </div>
         </div>
       </div>
-    </div>
+      <Dialog open={showLoginDialog} onOpenChange={setShowLoginDialog}>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>Login Required</DialogTitle>
+            <DialogDescription>
+              You must be logged in to create a team request. Please log in to
+              continue.
+            </DialogDescription>
+          </DialogHeader>
+          <LoginForm
+            onLoginSuccess={() => {
+              setShowLoginDialog(false);
+              toast({
+                title: 'Logged In Successfully',
+                description: 'You can now try creating a team again.',
+              });
+            }}
+          />
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }
