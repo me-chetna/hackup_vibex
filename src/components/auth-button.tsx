@@ -1,4 +1,3 @@
-
 "use client";
 import Link from 'next/link';
 import { useAuth } from '@/components/providers/auth-provider';
@@ -11,11 +10,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { PlusCircle, LogOut } from 'lucide-react';
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { LogOut } from 'lucide-react';
 import { Skeleton } from './ui/skeleton';
-import { useRouter } from 'next/navigation';
-import { useToast } from '@/hooks/use-toast';
 
 const getInitials = (name: string) => {
     if (!name) return 'U';
@@ -28,37 +25,14 @@ const getInitials = (name: string) => {
 
 export function AuthButton() {
     const { user, logout, loading } = useAuth();
-    const router = useRouter();
-    const { toast } = useToast();
-
-    const handleCreateRequestClick = () => {
-        // This button is only visible when the user is logged in.
-        if (!user) return;
-
-        // TODO: Replace 'acme.com' with your company's email domain
-        const ALLOWED_DOMAIN = 'acme.com';
-        if (user.email.endsWith(`@${ALLOWED_DOMAIN}`)) {
-            router.push('/create-request');
-        } else {
-            toast({
-                variant: 'destructive',
-                title: 'Permission Denied',
-                description: `Only users with an @${ALLOWED_DOMAIN} email can create requests.`,
-            });
-        }
-    };
     
     if (loading) {
-        return <Skeleton className="h-9 w-24 rounded-md" />;
+        return <Skeleton className="h-10 w-10 rounded-full" />;
     }
 
     if (user) {
         return (
             <div className="flex items-center gap-4">
-                <Button onClick={handleCreateRequestClick}>
-                    <PlusCircle className="mr-2 h-4 w-4" />
-                    Create Request
-                </Button>
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                          <Button variant="ghost" className="relative h-10 w-10 rounded-full">
