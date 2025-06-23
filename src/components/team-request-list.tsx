@@ -46,12 +46,15 @@ export function TeamRequestList({ initialRequests }: TeamRequestListProps) {
         </div>
         <Select>
             <SelectTrigger className="w-full md:w-[180px] h-14 bg-card border-0 rounded-full">
-                <SelectValue placeholder="Year" />
+                <SelectValue placeholder="Skills" />
             </SelectTrigger>
             <SelectContent>
-                <SelectItem value="2024">2024</SelectItem>
-                <SelectItem value="2023">2023</SelectItem>
-                <SelectItem value="2022">2022</SelectItem>
+                <SelectItem value="any">Any Skill</SelectItem>
+                <SelectItem value="react">React</SelectItem>
+                <SelectItem value="python">Python</SelectItem>
+                <SelectItem value="nodejs">Node.js</SelectItem>
+                <SelectItem value="nextjs">Next.js</SelectItem>
+                <SelectItem value="figma">Figma</SelectItem>
             </SelectContent>
         </Select>
         <Select>
