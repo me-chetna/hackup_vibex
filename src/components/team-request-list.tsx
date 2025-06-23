@@ -56,16 +56,6 @@ export function TeamRequestList({ initialRequests }: TeamRequestListProps) {
         </Select>
         <Select>
             <SelectTrigger className="w-full md:w-[180px] h-14 bg-card border-0 rounded-full">
-                <SelectValue placeholder="College" />
-            </SelectTrigger>
-            <SelectContent>
-                <SelectItem value="mit">MIT</SelectItem>
-                <SelectItem value="stanford">Stanford</SelectItem>
-                <SelectItem value="harvard">Harvard</SelectItem>
-            </SelectContent>
-        </Select>
-        <Select>
-            <SelectTrigger className="w-full md:w-[180px] h-14 bg-card border-0 rounded-full">
                 <SelectValue placeholder="Time" />
             </SelectTrigger>
             <SelectContent>
