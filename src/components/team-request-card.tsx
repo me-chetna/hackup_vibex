@@ -17,7 +17,7 @@ const getInitials = (name: string) => {
 
 export function TeamRequestCard({ request }: { request: TeamRequest }) {
   return (
-    <Card className="bg-card/60 backdrop-blur-sm border-primary/10 hover:border-primary/40 transition-colors duration-300 rounded-2xl w-full max-w-2xl mx-auto">
+    <Card className="bg-card/60 backdrop-blur-sm border-primary/10 hover:border-primary/40 transition-colors duration-300 rounded-2xl w-full h-full flex flex-col">
       <CardHeader>
         <CardTitle className="font-headline text-xl text-primary">{request.projectName}</CardTitle>
         <div className="flex items-center gap-2 text-sm text-muted-foreground pt-2">
@@ -28,7 +28,7 @@ export function TeamRequestCard({ request }: { request: TeamRequest }) {
             <span>{request.author.name}</span>
         </div>
       </CardHeader>
-      <CardContent className="flex flex-col gap-4 pt-4">
+      <CardContent className="flex flex-col gap-4 pt-4 flex-grow">
         <p className="text-muted-foreground line-clamp-3">{request.projectDescription}</p>
         <div>
             <h4 className="font-semibold text-sm mb-2 text-card-foreground/80">Skills Required</h4>

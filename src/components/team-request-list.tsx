@@ -78,13 +78,13 @@ export function TeamRequestList({ initialRequests }: TeamRequestListProps) {
       
       {isMounted && (
         <AnimatePresence>
-          <div className="flex flex-col space-y-6 max-w-2xl mx-auto w-full">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
             {filteredRequests.length > 0 ? (
               filteredRequests.map((request, i) => (
                 <motion.div
                   key={request.id}
                   layout
-                  className="w-full"
+                  className="w-full h-full"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95 }}
@@ -95,7 +95,7 @@ export function TeamRequestList({ initialRequests }: TeamRequestListProps) {
               ))
             ) : (
               <motion.div 
-                className="md:col-span-2 lg:col-span-3 text-center py-16"
+                className="md:col-span-2 text-center py-16"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
               >
